@@ -11,7 +11,7 @@ print(my_dict['tuple'][-1])
 my_dict['list'].append('very_last')
 my_dict['list'].pop(1)
 
-my_dict['dict']['i am a tuple'] = 42
+my_dict['dict'][('i am a tuple',)] = 42
 del my_dict['dict']['second']
 
 my_dict['set'].add(999999)
