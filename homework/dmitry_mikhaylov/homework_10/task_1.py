@@ -1,8 +1,7 @@
 def finish_me(func):
     def wrapper(*args):
-        result = func(*args)
-        print('\nfinished')
-        return result
+        func(*args)
+        print('finished')
 
     return wrapper
 
