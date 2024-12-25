@@ -24,12 +24,12 @@ def calc(first, second, operation):
         return first * second
 
 
-print(calc(2, 3)) # /
-print(calc(0, 1)) # /
-print(calc(1, 0)) # -
-print(calc(2, -3)) # *
-print(calc(-2, 3)) # *
-print(calc(-2, -3)) # *
-print(calc(3, 2)) # -
-print(calc(-2, -2)) # +
-print(calc(2, 2)) # +
+print(calc(2, 3))  # /
+print(calc(0, 1))  # /
+print(calc(1, 0))  # -
+print(calc(2, -3))  # *
+print(calc(-2, 3))  # *
+print(calc(-2, -3))  # *
+print(calc(3, 2))  # -
+print(calc(-2, -2))  # +
+print(calc(2, 2))  # +
