@@ -272,6 +272,6 @@ print(f'Found by color = red: {bouquet.property_find('color', 'red')}')
 print(f'Found by flower_count = 5: {bouquet.property_find('flower_count', 5)}')
 print(f'Unsorted: {bouquet.composition}')
 print(f'Sorted by name: '
-      f'{sorted(bouquet.composition,
-                key=lambda composition: composition.name)}')
+      f'{sorted(bouquet.composition, key=lambda composition: composition.name)}'
+      f'')
 print(f'Sorted by price: {sorted(bouquet.composition)}')
