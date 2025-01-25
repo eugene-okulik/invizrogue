@@ -230,8 +230,7 @@ print(bouquet.avg_wilting, 2)
 
 print(rose_1)
 
-print('Found by color = red: '
-      f'{bouquet.property_find('color', 'red')}')
+print('Found by color = red:', {bouquet.property_find('color', 'red')})
 print(f'Found by flower_count = 5: {bouquet.property_find('flower_count', 5)}')
 print(f'Unsorted: {bouquet.composition}')
 print(f'Sorted by price: {bouquet.sort_by_price()}')
