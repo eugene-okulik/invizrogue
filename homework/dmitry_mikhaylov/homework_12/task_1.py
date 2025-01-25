@@ -1,11 +1,9 @@
 class Flowers:
-    def __init__(self, name, color, price):
+    def __init__(self, name, color, price, wilting):
         self.__name = name
         self.__color = color
         self.__price = price
-
-    def __lt__(self, other):
-        return self.price < other.price
+        self.__wilting = wilting
 
     @property
     def name(self):
@@ -23,6 +21,10 @@ class Flowers:
     def price(self, price):
         self.__price = price
 
+    @property
+    def wilting(self):
+        return self.__wilting
+
     def __str__(self):
         return (f'Name: {self.__name}, '
                 f'Color: {self.__color}, '
@@ -36,11 +38,10 @@ class Flowers:
 
 class Rose(Flowers):
     def __init__(self, name, color, stem_length, thorns, cluster, price):
-        super().__init__(name, color, price)
+        super().__init__(name, color, price, 10)
         self.__stem_length = stem_length
         self.__thorns = thorns
         self.__cluster = cluster
-        self.__wilting = 10
 
     @property
     def stem_length(self):
@@ -54,29 +55,24 @@ class Rose(Flowers):
     def cluster(self):
         return self.__cluster
 
-    @property
-    def wilting(self):
-        return self.__wilting
-
     def __str__(self):
-        return (super().__str__() +
-                f'Stem length: {self.__stem_length}, '
+        return (super().__str__()
+                + f'Stem length: {self.__stem_length}, '
                 f'Have thorns: {self.__thorns}, '
                 f'Is cluster: {self.__cluster}')
 
     def __repr__(self):
-        return (super().__repr__() +
-                f'Stem length: {self.__stem_length}, '
+        return (super().__repr__()
+                + f'Stem length: {self.__stem_length}, '
                 f'Have thorns: {self.__thorns}, '
                 f'Is cluster: {self.__cluster}\n')
 
 
 class Orchid(Flowers):
     def __init__(self, name, color, leaf_type, lip_color, price):
-        super().__init__(name, color, price)
+        super().__init__(name, color, price, 25)
         self.__leaf_type = leaf_type
         self.__lip_color = lip_color
-        self.__wilting = 25
 
     @property
     def leaf_type(self):
@@ -86,27 +82,22 @@ class Orchid(Flowers):
     def lip_color(self):
         return self.__lip_color
 
-    @property
-    def wilting(self):
-        return self.__wilting
-
     def __str__(self):
-        return (super().__str__() +
-                f'Leaf type: {self.__leaf_type}, '
+        return (super().__str__()
+                + f'Leaf type: {self.__leaf_type}, '
                 f'Lip color: {self.__lip_color}')
 
     def __repr__(self):
-        return (super().__repr__() +
-                f'Leaf type: {self.__leaf_type}, '
+        return (super().__repr__()
+                + f'Leaf type: {self.__leaf_type}, '
                 f'Lip color: {self.__lip_color}\n')
 
 
 class Narcissus(Flowers):
     def __init__(self, name, color, center_color, stem_length, price):
-        super().__init__(name, color, price)
+        super().__init__(name, color, price, 15)
         self.__stem_length = stem_length
         self.__center_color = center_color
-        self.__wilting = 15
 
     @property
     def stem_length(self):
@@ -116,50 +107,40 @@ class Narcissus(Flowers):
     def center_color(self):
         return self.__center_color
 
-    @property
-    def wilting(self):
-        return self.__wilting
-
     def __str__(self):
-        return (super().__str__() +
-                f'Center color: {self.__center_color}, '
+        return (super().__str__()
+                + f'Center color: {self.__center_color}, '
                 f'Stem length: {self.__stem_length}')
 
     def __repr__(self):
-        return (super().__repr__() +
-                f'Center color: {self.__center_color}, '
+        return (super().__repr__()
+                + f'Center color: {self.__center_color}, '
                 f'Stem length: {self.__stem_length}\n')
 
 
 class Gladiola(Flowers):
     def __init__(self, name, color, flower_count, price):
-        super().__init__(name, color, price)
+        super().__init__(name, color, price, 15)
         self.__flower_count = flower_count
-        self.__wilting = 15
 
     @property
     def flower_count(self):
         return self.__flower_count
 
-    @property
-    def wilting(self):
-        return self.__wilting
-
     def __str__(self):
-        return (super().__str__() +
-                f'Flower count: {self.__flower_count}')
+        return (super().__str__()
+                + f'Flower count: {self.__flower_count}')
 
     def __repr__(self):
-        return (super().__repr__() +
-                f'Flower count: {self.__flower_count}\n')
+        return (super().__repr__()
+                + f'Flower count: {self.__flower_count}\n')
 
 
 class Lily(Flowers):
     def __init__(self, name, color, flower_count, stem_length, price):
-        super().__init__(name, color, price)
+        super().__init__(name, color, price, 14)
         self.__flower_count = flower_count
         self.__stem_length = stem_length
-        self.__wilting = 14
 
     @property
     def flower_count(self):
@@ -169,18 +150,14 @@ class Lily(Flowers):
     def stem_length(self):
         return self.__stem_length
 
-    @property
-    def wilting(self):
-        return self.__wilting
-
     def __str__(self):
-        return (super().__str__() +
-                f'Flower count: {self.__flower_count}, '
+        return (super().__str__()
+                + f'Flower count: {self.__flower_count}, '
                 f'Stem length: {self.__stem_length}')
 
     def __repr__(self):
-        return (super().__repr__() +
-                f'Flower count: {self.__flower_count}, '
+        return (super().__repr__()
+                + f'Flower count: {self.__flower_count}, '
                 f'Stem length: {self.__stem_length}\n')
 
 
@@ -199,35 +176,20 @@ class Bouquet:
     def property_find(self, prop, value):
         for flower in self.__composition:
             if hasattr(flower, prop):
-                if prop == 'name' and flower.name == value:
+                if getattr(flower, prop) == value:
                     return flower
-                elif prop == 'color' and flower.color == value:
-                    return flower
-                elif prop == 'price' and flower.price == value:
-                    return flower
-                elif prop == 'wilting' and flower.wilting == value:
-                    return flower
-                elif (prop == 'flower_count'
-                      and flower.flower_count == value):
-                    return flower
-                elif (prop == 'stem_length'
-                      and flower.stem_length == value):
-                    return flower
-                elif (prop == 'leaf_type'
-                      and flower.leaf_type == value):
-                    return flower
-                elif (prop == 'lip_color'
-                      and flower.lip_color == value):
-                    return flower
-                elif (prop == 'center_color'
-                      and flower.center_color == value):
-                    return flower
-                elif (prop == 'cluster'
-                      and flower.cluster == value):
-                    return flower
-                elif (prop == 'thorns'
-                      and flower.thorns == value):
-                    return flower
+
+    def sort_by_name(self):
+        return sorted(self.__composition,
+                      key=lambda composition: composition.name)
+
+    def sort_by_price(self):
+        return sorted(self.__composition,
+                      key=lambda composition: composition.price)
+
+    def sort_by_color(self):
+        return sorted(self.__composition,
+                      key=lambda composition: composition.color)
 
     def __get_wilting(self):
         value = 0
@@ -271,6 +233,6 @@ print(rose_1)
 print(f'Found by color = red: {bouquet.property_find('color', 'red')}')
 print(f'Found by flower_count = 5: {bouquet.property_find('flower_count', 5)}')
 print(f'Unsorted: {bouquet.composition}')
-print('Sorted by name: ', end='')
-print(sorted(bouquet.composition, key=lambda composition: composition.name))
-print(f'Sorted by price: {sorted(bouquet.composition)}')
+print(f'Sorted by price: {bouquet.sort_by_price()}')
+print(f'Sorted by color: {bouquet.sort_by_color()}')
+print(f'Sorted by name: {bouquet.sort_by_name()}')
