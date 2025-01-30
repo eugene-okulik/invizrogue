@@ -1,0 +1,81 @@
+-- Наполнение таблиц данными
+INSERT INTO students (name, second_name) VALUES ('George', 'Lucas');
+
+INSERT INTO books (title)
+VALUES
+('Lightsaber manual'),
+('Laser weapons manual'),
+('Space fighter control manual');
+
+WITH get_student_id(given_student_id) AS (
+	SELECT id
+	FROM students
+	WHERE name = 'George' AND second_name = 'Lucas'
+)
+UPDATE books, get_student_id
+SET taken_by_student_id = given_student_id
+WHERE title IN ('Lightsaber manual', 'Laser weapons manual', 'Space fighter control manual');
+
+INSERT INTO `groups` (title, start_date, end_date) VALUES ('StarWarsGroup', 'jan 2025', 'jan 2026');
+
+WITH get_group_id(given_group_id) AS (
+	SELECT DISTINCT id
+	FROM `groups`
+	WHERE title = 'StarWarsGroup'
+	AND end_date = 'jan 2026'
+)
+UPDATE students, get_group_id
+SET group_id = given_group_id
+WHERE name = 'George' AND second_name = 'Lucas';
+
+INSERT INTO subjets (title)
+VALUES
+('Lightsaber lessons'),
+('Laser weapons lessons'),
+('Space fighter control lessons');
+
+UPDATE subjets SET title = 'Lightsaber course' WHERE title = 'Lightsaber lessons';
+UPDATE subjets SET title = 'Laser weapons course' WHERE title = 'Laser weapons lessons';
+UPDATE subjets SET title = 'Space fighter control course' WHERE title = 'Space fighter control lessons';
+
+INSERT INTO lessons (title, subject_id)
+VALUES
+('Lightsaber lesson 1', (SELECT id FROM subjets WHERE title = 'Lightsaber course')),
+('Lightsaber lesson 2', (SELECT id FROM subjets WHERE title = 'Lightsaber course')),
+('Laser weapons lesson 1', (SELECT id FROM subjets WHERE title = 'Laser weapons course')),
+('Laser weapons lesson 2', (SELECT id FROM subjets WHERE title = 'Laser weapons course')),
+('Space fighter control lesson 1', (SELECT id FROM subjets WHERE title = 'Space fighter control course')),
+('Space fighter control lesson 2', (SELECT id FROM subjets WHERE title = 'Space fighter control course'));
+
+INSERT INTO marks (value, lesson_id, student_id)
+VALUES
+(5, (SELECT id FROM lessons WHERE title = 'Lightsaber lesson 1'), (SELECT id FROM students WHERE name = 'George' AND second_name = 'Lucas')),
+(5, (SELECT id FROM lessons WHERE title = 'Lightsaber lesson 2'), (SELECT id FROM students WHERE name = 'George' AND second_name = 'Lucas')),
+(5, (SELECT id FROM lessons WHERE title = 'Laser weapons lesson 1'), (SELECT id FROM students WHERE name = 'George' AND second_name = 'Lucas')),
+(5, (SELECT id FROM lessons WHERE title = 'Laser weapons lesson 2'), (SELECT id FROM students WHERE name = 'George' AND second_name = 'Lucas')),
+(5, (SELECT id FROM lessons WHERE title = 'Space fighter control lesson 1'), (SELECT id FROM students WHERE name = 'George' AND second_name = 'Lucas')),
+(5, (SELECT id FROM lessons WHERE title = 'Space fighter control lesson 2'), (SELECT id FROM students WHERE name = 'George' AND second_name = 'Lucas'));
+
+
+-- Выполнение задания
+-- 1. Все оценки студента
+SELECT `value`
+FROM marks m
+LEFT JOIN students s ON m.student_id = s.id
+WHERE s.name = 'George' AND s.second_name = 'Lucas';
+
+-- 2. Все книги, которые находятся у студента
+SELECT title
+FROM `books` b
+LEFT JOIN students s ON b.taken_by_student_id = s.id
+WHERE s.name = 'George' AND s.second_name = 'Lucas';
+
+-- 3. Вся информация о студенте
+SELECT s.name, s.second_name, g.title AS `group`, b.title AS book, sj.title AS subject, l.title AS lesson, m.value AS mark
+FROM students s
+JOIN `groups` g ON s.group_id = g.id
+JOIN books b ON b.taken_by_student_id = s.id
+JOIN marks m ON m.student_id = s.id
+JOIN lessons l ON l.id = m.lesson_id
+JOIN subjets sj ON sj.id = l.subject_id
+WHERE s.name = 'George' AND s.second_name = 'Lucas';
