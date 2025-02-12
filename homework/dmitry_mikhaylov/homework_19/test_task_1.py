@@ -161,6 +161,6 @@ def test_negative_delete_object():
     assert resp.status_code == 404, f'Ошибка при удалении несуществующего объекта. Статус: {resp.status_code}'
 
 
-def test_negative_get_object(get_new_id):
-    resp = get_object(get_new_id)
-    assert resp.status_code == 200, f'Ошибка при получении несуществующего объекта. Статус: {resp.status_code}'
+def test_negative_get_object():
+    resp = get_object(999999)
+    assert resp.status_code == 404, f'Ошибка при получении несуществующего объекта. Статус: {resp.status_code}'
