@@ -2,20 +2,6 @@ import requests
 import pytest
 
 
-@pytest.fixture
-def get_new_id():
-    body = {
-        "data": {
-            "color": "test",
-            "size": "test"
-        },
-        "name": "New test object"
-    }
-    response = add_object(body).json()
-    yield response['id']
-    delete_object(response['id'])
-
-
 @pytest.fixture(scope='session')
 def session_info():
     print('Start testing')
