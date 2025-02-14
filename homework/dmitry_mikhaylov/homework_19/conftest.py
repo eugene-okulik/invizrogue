@@ -18,4 +18,4 @@ def get_new_id():
         headers=headers
     ).json()
     yield response['id']
-    requests.delete(f'http://167.172.172.115:52353/object/{response['id']}')
+    requests.delete(f"http://167.172.172.115:52353/object/{response['id']}")

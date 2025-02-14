@@ -162,7 +162,8 @@ def test_negative_add_object():
     with allure.step('Осуществление POST-запроса для создания объекта'):
         resp = add_object(body)
     with allure.step('Проверка кода ответа'):
-        assert resp.status_code == 400, f'Неверный статус при добавлении некорректного объекта. Статус: {resp.status_code}'
+        assert resp.status_code == 400, \
+            f'Неверный статус при добавлении некорректного объекта. Статус: {resp.status_code}'
 
 
 @allure.title('Тестирование попытки полного изменения объекта некорректными данными')
