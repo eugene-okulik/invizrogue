@@ -1,10 +1,20 @@
 import pytest
 import requests
 from endpoints.commons import Commons
+from endpoints.get_object import GetObject
 from endpoints.create_object import CreateObject
 from endpoints.delete_object import DeleteObject
-from endpoints.get_object import GetObject
 from endpoints.update_object import UpdateObject
+
+
+@pytest.fixture
+def clean():
+    objects = []
+    def add_object_id(obj_id):
+        objects.append(obj_id)
+    yield add_object_id
+    for object_id in objects:
+        requests.delete(f"{Commons.url}/{object_id}")
 
 
 @pytest.fixture

@@ -17,8 +17,8 @@ NEGATIVE_TEST_DATA = [
 
 @pytest.mark.critical
 @pytest.mark.parametrize('data', POSITIVE_TEST_DATA)
-def test_positive_add_object(creating, data):
-    creating.new_object(payload=data)
+def test_positive_add_object(creating, clean, data):
+    creating.new_object(clean, payload=data)
     creating.check_status_code(200)
     creating.check_response_name_is_correct(data['name'])
     creating.check_response_color_is_correct(data['data']['color'])
@@ -27,6 +27,6 @@ def test_positive_add_object(creating, data):
 
 @pytest.mark.critical
 @pytest.mark.parametrize('data', NEGATIVE_TEST_DATA)
-def test_negative_add_object(creating, data):
-    creating.new_object(payload=data)
+def test_negative_add_object(creating, clean, data):
+    creating.new_object(clean, payload=data)
     creating.check_status_code(400)

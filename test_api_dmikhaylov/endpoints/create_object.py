@@ -5,7 +5,7 @@ from endpoints.commons import Commons
 
 class CreateObject(Commons):
     @allure.step('Отправка POST-запроса для создания объекта')
-    def new_object(self, payload, headers=None):
+    def new_object(self, clean, payload, headers=None):
         headers = headers or self.headers
         self.response = requests.post(
             self.url,
@@ -15,7 +15,7 @@ class CreateObject(Commons):
         self.status_code = self.response.status_code
 
         if self.status_code == 200:
-            requests.delete(f'{self.url}/{self.response.json()["id"]}')
+            clean(self.response.json()["id"])
         return self.response
 
     @allure.step('Проверка названия созданного объекта')
