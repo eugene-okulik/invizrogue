@@ -10,6 +10,7 @@ from endpoints.update_object import UpdateObject
 @pytest.fixture
 def clean():
     objects = []
+
     def add_object_id(obj_id):
         objects.append(obj_id)
     yield add_object_id
