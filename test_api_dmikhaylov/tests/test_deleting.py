@@ -2,8 +2,8 @@ import pytest
 
 
 @pytest.mark.critical
-def test_positive_delete_object(deleting, del_id):
-    deleting.del_object(del_id)
+def test_positive_delete_object(deleting, get_id):
+    deleting.del_object(get_id)
     deleting.check_status_code(200)
     deleting.check_response_message_is_correct()
 
