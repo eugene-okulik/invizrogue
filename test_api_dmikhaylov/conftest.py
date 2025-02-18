@@ -24,6 +24,7 @@ def get_id():
     yield response['id']
     requests.delete(f"{Commons.url}/{response['id']}")
 
+
 @pytest.fixture
 def del_id():
     payload = {
@@ -40,17 +41,21 @@ def del_id():
     ).json()
     yield response['id']
 
+
 @pytest.fixture
 def creating():
     return CreateObject()
+
 
 @pytest.fixture
 def updating():
     return UpdateObject()
 
+
 @pytest.fixture
 def deleting():
     return DeleteObject()
+
 
 @pytest.fixture
 def getting():

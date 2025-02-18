@@ -10,4 +10,3 @@ class GetObject(Commons):
         self.response = requests.get(f'{self.url}/{get_id}', headers=headers)
         self.status_code = self.response.status_code
         return self.response
-

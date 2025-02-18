@@ -14,6 +14,7 @@ NEGATIVE_TEST_DATA = [
     {"data": {"color": "blue", "size": "mini"}}
 ]
 
+
 @pytest.mark.critical
 @pytest.mark.parametrize('data', POSITIVE_TEST_DATA)
 def test_positive_add_object(creating, data):
