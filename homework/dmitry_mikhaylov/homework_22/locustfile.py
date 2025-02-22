@@ -23,7 +23,6 @@ class ApiUser(HttpUser):
         )
         self.obj_id = response.json()['id']
 
-
     @task(2)
     def get_all_objects(self):
         self.client.get(
