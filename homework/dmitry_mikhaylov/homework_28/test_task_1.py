@@ -21,7 +21,5 @@ def test_should_change_product_name(page: Page):
     page.goto("https://www.apple.com/shop/buy-iphone")
     page.get_by_role("button", name="Take a closer look - iPhone 16 Pro & iPhone 16 Pro Max").click()
 
-    assert (
-            page.locator("button[class='rf-digitalmat-tabnav-button button button-neutral current']")
-            .inner_text() == change_to_text
-    )
+    assert (page.locator("[class='rf-digitalmat-tabnav-button button button-neutral current']").inner_text()
+            == change_to_text)
