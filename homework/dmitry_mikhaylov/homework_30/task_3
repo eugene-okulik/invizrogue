@@ -1,0 +1,9 @@
+/dev/null - crw-rw-rw- символьное устройство
+/dev/zero - crw-rw-rw- символьное устройство
+/dev/sda - brw-rw---- блочное устройство
+/dev/tty - crw-rw-rw- символьное устройство
+/root - drwxr-xr-x каталог
+/etc/passwd - -rw-r--r-- обычный файл
+/proc/mounts - lrwxrwxrwx символьная ссылка
+/bin/ls - -rwxr-xr-x обычный файл
+/bin/zcat - -rwxr-xr-x обычный файл
